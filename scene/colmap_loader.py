@@ -145,6 +145,9 @@ def read_extrinsics_binary_vast(path_to_model_file, lines):
             # Read all 2D points data even if it is not needed
             x_y_id_s = read_next_bytes(fid, num_bytes=24 * num_points2D, format_char_sequence="ddq" * num_points2D)
 
+            # /を含む場合は最後の部分だけつかう
+            if "/" in image_name:
+                image_name = image_name.split("/")[-1]
             if image_name not in lines:
                 continue  # Continue to the next image after reading all data for the current image
 
